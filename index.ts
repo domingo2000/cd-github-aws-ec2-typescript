@@ -25,7 +25,7 @@ const router = new Router();
 
 
 router.get('/', (ctx, next) => {
-  ctx.body = { message: "Hello world!" };
+  ctx.body = { message: "Hello world with a beatiful CD!" };
 });
 
 app.use(router.routes()).use(router.allowedMethods());
