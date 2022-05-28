@@ -14,4 +14,8 @@ hooks:
       timeout: 100
       runas: root
       overwrite: true
-
+  ApplicationStop:
+    - location: scripts/stop_server
+      timeout: 100
+      runas: root
+      overwrite: true
