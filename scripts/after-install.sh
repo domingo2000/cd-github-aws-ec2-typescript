@@ -5,11 +5,3 @@ curl -SL https://github.com/docker/compose/releases/download/v2.5.0/docker-compo
 sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose --version
-# curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh -o install_nvm.sh
-# 
-# bash install_nvm.sh
-# nvm install 16
-# 
-# nvm use 16
-# 
-# npm install -g forever
