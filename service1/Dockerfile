@@ -13,6 +13,8 @@ COPY build ./build
 # See the current files in the docker container
 RUN ls -a
 
+COPY . .
+
 RUN yarn install --only=production
 
 EXPOSE 3000

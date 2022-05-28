@@ -18,8 +18,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Build the code
+      - name: Build service1
         run: |
+          cd service1
+          npm install
+          npm run build
+      - name: Build service2
+        run: |
+          cd service2
           npm install
           npm run build
 

@@ -1,11 +1,15 @@
 services:
-  app:
+  service1:
     build:
-      context: .
+      context: ./service1
       dockerfile: Dockerfile
-    image: node:16-alpine
     ports:
       - "3000:3000"
-    volumes:
-      - ./build:/build
+    restart: unless-stopped
+  service2:
+    build:
+      context: ./service2
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
     restart: unless-stopped
