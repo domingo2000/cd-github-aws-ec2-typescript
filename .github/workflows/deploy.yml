@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Build the code and run tests
+        run: |
+          npm install
+          npm run build
+
+      - name: Upload builded app to S3
+        run: |
+          aws deploy push \
+            --application-name cd-typescript \
+            --description "This is a revision for the cd-typescript-app" \
+            --ignore-hidden-files \
+            --s3-location s3://cd-typescript-codedeploy-domingo/cd-typescript-app.zip \
+            --source .
+      - name: Deploy application
+        run: |
+          aws deploy create-deployment\
+            --application-name cd-typescript\
+            --s3-location bucket=cd-typescript-codedeploy-domingo,key=cd-typescript-app.zip,bundleType=zip\
+            --deployment-group-name cd-typescript\
+            --deployment-config-name CodeDeployDefault.OneAtATime\
+            --description "This is a revision for the cd-typescript-app"
+          

@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: node:16-alpine
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./build:/build
+    restart: unless-stopped
